@@ -1,3 +1,25 @@
+## TODO
+
+- Add all day checkbox => [DatePicker/DateTimePicker] 
+- Documentation like material ui
+- keyboard navigation
+- storybook
+- material ui => dialog/modal: keepMounted = false
+- useReducer
+- styling option
+- provide default values object asa a prop
+- add summary of occurrence
+## Questions
+
+- Nullable values? what should be default values?
+- how to clear values 
+- Custom Occurrences component props? how to pass them from parents
+- redux/saga required ? NO
+- Modal
+- Grids issues & some components styling [radios, inlines, selects]
+- utc?
+- repeat on days
+
 # react-recurrence
 
 > This package is responsible for generating basic recurrences along with custom ones.

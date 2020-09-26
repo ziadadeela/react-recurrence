@@ -1,7 +1,7 @@
-import { ExampleComponent } from '.'
+import { Recurrence } from '.'
 
 describe('ExampleComponent', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(Recurrence).toBeTruthy()
   })
 })
