@@ -1,30 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Recurrence } from 'react-recurrence'
 import 'react-recurrence/dist/index.css'
+import { RecurrenceType } from '../../src/types'
 
 const App = () => {
-  const [startDate, setStartDate] = React.useState<Date>(new Date())
-  const [endDate, setEndDate] = React.useState<Date>(new Date())
-  const [frequency, setFrequency] = React.useState<string>('')
+  const defaultEndingOccurrencesNumber = 13
 
-  const handleStartDateChange = (date: Date) => {
-    setStartDate(date)
+
+  const defaultRecurrence = {
+    startDate: new Date(),
+    endDate: new Date(),
+    isAllDay: false,
+    frequency: 'weekly',
+    numberOfRepetitions: 1,
+    weekDaysRepetition: [],
+    endingCondition: 'never',
+    endingOccurrencesNumber: defaultEndingOccurrencesNumber
   }
-  const handleEndDateChange = (date: Date) => {
-    setEndDate(date)
+  const [recurrence, setRecurrence] = useState<RecurrenceType>(
+    defaultRecurrence
+  )
+
+  const handleRecurrenceChange = (newRecurrence: RecurrenceType) => {
+    setRecurrence(newRecurrence)
   }
-  const handleFrequencyChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFrequency(event.target.value)
-  }
-  return <Recurrence startDate={startDate}
-                     endDate={endDate}
-                     frequency={frequency}
-                     onStartDateChange={handleStartDateChange}
-                     onEndDateChange={handleEndDateChange}
-                     onFrequencyChange={handleFrequencyChange}
+
+  return <Recurrence
+    recurrence={recurrence}
+    onChange={handleRecurrenceChange}
   />
 }
 

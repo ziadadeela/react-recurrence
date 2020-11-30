@@ -4,7 +4,6 @@
 - Documentation like material ui
 - keyboard navigation
 - storybook
-- material ui => dialog/modal: keepMounted = false
 - useReducer
 - styling option
 - provide default values object asa a prop
@@ -12,13 +11,17 @@
 ## Questions
 
 - Nullable values? what should be default values?
-- how to clear values 
+- **how to clear values**
 - Custom Occurrences component props? how to pass them from parents
 - redux/saga required ? NO
-- Modal
 - Grids issues & some components styling [radios, inlines, selects]
 - utc?
 - repeat on days
+- how to make sure that repeat days are not messed up
+- controlled vs uncontrolled
+- buttons style
+- computed property [week(s)/days/...]
+- when deleting numeric input => nan value error
 
 # react-recurrence
 

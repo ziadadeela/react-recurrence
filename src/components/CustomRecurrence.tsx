@@ -39,7 +39,7 @@ export const CustomRecurrence = ({
   ) => {
     setCustomRecurrence({
       ...customRecurrence,
-      numberOfRepetition: parseInt(event.target.value)
+      numberOfRepetitions: parseInt(event.target.value)
     })
   }
   const onRepeatOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +93,7 @@ export const CustomRecurrence = ({
           id='number-of-repetition'
           // label='Repeat every'
           type='number'
-          value={customRecurrence.numberOfRepetition}
+          value={customRecurrence.numberOfRepetitions}
           onChange={onNumberOfRepetitionChange}
           InputLabelProps={{
             shrink: true
