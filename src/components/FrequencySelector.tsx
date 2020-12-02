@@ -53,12 +53,30 @@ export const FrequencySelector = ({
   ) => {
     onFrequencyChange(event.target.value)
   }
-  //
-  // const handleNumberOfRepetitionsChange = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   onNumberOfRepetitionsChange(parseInt(event.target.value))
-  // }
+
+  const getFrequencyLabel = () => {
+    switch (frequency) {
+      case 'hourly':
+        return 'hour'
+      case 'daily':
+        return 'day'
+      case 'weekly':
+        return 'week'
+      case 'monthly':
+        return 'month'
+      case 'annually':
+        return 'year'
+      default:
+        return ''
+    }
+  }
+  const getRepetitionsLabelByFrequency = () => {
+    const frequencyLabel = getFrequencyLabel()
+    if (frequencyLabel === '') {
+      return ''
+    }
+    return `${frequencyLabel}(s)`
+  }
   return (
     <div>
       <Grid item xs={12}>
@@ -76,7 +94,7 @@ export const FrequencySelector = ({
             name='number-of-repetition'
             value={numberOfRepetitions}
             onChange={onNumberOfRepetitionsChange}
-            adornmentLabel='week(s)'
+            adornmentLabel={getRepetitionsLabelByFrequency()}
           />
         </Grid>
       )}

@@ -16,7 +16,6 @@ interface RecurrenceProps {
 }
 
 export const Recurrence = ({ recurrence, onChange }: RecurrenceProps) => {
-
   const handleFieldChange = (key: string, value: any) => {
     const newRecurrence = {
       ...recurrence,
