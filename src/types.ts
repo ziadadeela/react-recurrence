@@ -10,13 +10,13 @@ export interface CustomRecurrenceType {
 
 export interface RecurrenceType {
   startDate: Date
-  isAllDay: boolean
   frequency: string
   numberOfRepetitions?: number
   weekDaysRepetition: Array<number>
   endingCondition: string
   endingOccurrencesNumber?: number
   endDate?: Date
+  isAllDay: boolean
   startTime?: Date
   endTime?: Date
 }
