@@ -31,3 +31,9 @@ export interface Option {
   key: string
   title: string
 }
+
+export const EndingCondition = {
+  NONE: 'none',
+  END_DATE: 'end_date',
+  OCCURRENCES_NUMBER: 'occurrences_number'
+}

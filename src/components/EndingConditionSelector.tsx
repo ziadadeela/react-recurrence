@@ -7,6 +7,7 @@ import Radio from '@material-ui/core/Radio/Radio'
 import FormControl from '@material-ui/core/FormControl'
 import { DatePicker } from './general/DatePicker'
 import { NumberInput } from './general/NumberInput'
+import { EndingCondition } from '../types'
 
 interface EndingConditionSelectorProps {
   endDate?: Date
@@ -60,7 +61,7 @@ export const EndingConditionSelector = ({
           >
             <Grid item sm={6}>
               <FormControlLabel
-                value='none'
+                value={EndingCondition.NONE}
                 control={<Radio color='primary' />}
                 label='Never'
               />
@@ -75,7 +76,7 @@ export const EndingConditionSelector = ({
               alignItems='flex-start'
             >
               <FormControlLabel
-                value='end_date'
+                value={EndingCondition.END_DATE}
                 control={<Radio color='primary' />}
                 label='On'
               />
@@ -86,25 +87,27 @@ export const EndingConditionSelector = ({
                 label='End'
                 value={endDate}
                 onChange={onEndDateChange}
-                disabled={endingCondition !== 'end_date'}
+                disabled={endingCondition !== EndingCondition.END_DATE}
               />
             </Grid>
           </Grid>
           <Grid container spacing={1}>
             <Grid item sm={6} container alignItems='flex-start'>
               <FormControlLabel
-                value='occurrences_number'
+                value={EndingCondition.OCCURRENCES_NUMBER}
                 control={<Radio color='primary' />}
                 label='After'
               />
             </Grid>
             <Grid item sm={6}>
               <NumberInput
-                name='ending-ocurrences-number'
+                name='ending-occurrences-number'
                 value={endingOccurrencesNumber}
                 onChange={onEndingOccurrencesNumberChange}
                 adornmentLabel='occurrences'
-                disabled={endingCondition !== 'occurrences_number'}
+                disabled={
+                  endingCondition !== EndingCondition.OCCURRENCES_NUMBER
+                }
               />
             </Grid>
           </Grid>
