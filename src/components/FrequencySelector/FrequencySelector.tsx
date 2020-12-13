@@ -1,10 +1,12 @@
 import * as React from 'react'
-import { Option } from '../types'
-import { WeekDaysSelector } from './WeekDaysSelector'
+import { Option } from '../../types'
 import Grid from '@material-ui/core/Grid'
 import Fade from '@material-ui/core/Fade'
-import { DropDown } from './general/DropDown'
-import { NumberInput } from './general/NumberInput'
+import { DropDown } from '../general/DropDown'
+import { NumberInput } from '../general/NumberInput'
+import WeekDaysSelector from '../WeekDaysSelector'
+import { withStyles } from '@material-ui/core'
+import styles from '../WeekDaysSelector/styles'
 
 interface FrequencySelectorProps {
   frequency: string
@@ -40,7 +42,7 @@ const FREQUENCY_OPTIONS: Option[] = [
     title: 'Annually'
   }
 ]
-export const FrequencySelector = ({
+const FrequencySelector = ({
   frequency,
   numberOfRepetitions,
   weekDaysRepetition,
@@ -112,3 +114,4 @@ export const FrequencySelector = ({
     </div>
   )
 }
+export default withStyles(styles)(FrequencySelector)

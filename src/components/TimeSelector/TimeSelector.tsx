@@ -2,18 +2,19 @@ import * as React from 'react'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import { KeyboardTimePicker } from '@material-ui/pickers'
-import { Grid } from '@material-ui/core'
+import { Grid, withStyles } from '@material-ui/core'
+import styles from '../WeekDaysSelector/styles'
 
 interface TimeSelectorProps {
   isAllDay: boolean
   startTime?: Date
   endTime?: Date
   onAllDayChange: (isAllDay: boolean) => void
-  onStartTimeChange: (startTime: Date) => void
-  onEndTimeChange: (endTime: Date) => void
+  onStartTimeChange: (startTime?: Date) => void
+  onEndTimeChange: (endTime?: Date) => void
 }
 
-export const TimeSelector = ({
+const TimeSelector = ({
   isAllDay,
   startTime,
   endTime,
@@ -25,23 +26,17 @@ export const TimeSelector = ({
   const handleAllDayChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onAllDayChange(event.target.checked)
   }
-  const handleStartTimeChange = (date: Date) => {
+  const handleStartTimeChange = (date?: Date) => {
     onStartTimeChange(date)
   }
-  const handleEndTimeChange = (date: Date) => {
+  const handleEndTimeChange = (date?: Date) => {
     onEndTimeChange(date)
   }
 
   return (
     <div>
       <Grid container spacing={1}>
-        <Grid
-          item
-          sm={4}
-          justify='flex-end'
-          container
-          alignItems='flex-end'
-        >
+        <Grid item sm={4} justify='flex-end' container alignItems='flex-end'>
           <FormControlLabel
             control={
               <Checkbox
@@ -98,3 +93,4 @@ export const TimeSelector = ({
     </div>
   )
 }
+export default withStyles(styles)(TimeSelector)

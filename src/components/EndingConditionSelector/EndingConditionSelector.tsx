@@ -1,13 +1,14 @@
 import * as React from 'react'
 import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup/RadioGroup'
-import { Grid } from '@material-ui/core'
+import { Grid, withStyles } from '@material-ui/core'
 import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel'
 import Radio from '@material-ui/core/Radio/Radio'
 import FormControl from '@material-ui/core/FormControl'
-import { DatePicker } from './general/DatePicker'
-import { NumberInput } from './general/NumberInput'
-import { EndingCondition } from '../types'
+import { DatePicker } from '../general/DatePicker'
+import { NumberInput } from '../general/NumberInput'
+import { EndingCondition } from '../../types'
+import styles from '../WeekDaysSelector/styles'
 
 interface EndingConditionSelectorProps {
   endDate?: Date
@@ -18,7 +19,7 @@ interface EndingConditionSelectorProps {
   onEndDateChange: (endDate: Date) => void
 }
 
-export const EndingConditionSelector = ({
+const EndingConditionSelector = ({
   endingCondition,
   endDate,
   endingOccurrencesNumber,
@@ -116,3 +117,4 @@ export const EndingConditionSelector = ({
     </div>
   )
 }
+export default withStyles(styles)(EndingConditionSelector)

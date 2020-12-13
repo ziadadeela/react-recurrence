@@ -1,7 +1,10 @@
-import { RecurrenceDay } from '../types'
+import { RecurrenceDay } from '../../types'
 import Tooltip from '@material-ui/core/Tooltip/Tooltip'
 import Button from '@material-ui/core/Button'
 import * as React from 'react'
+import { withStyles, WithStyles } from '@material-ui/core'
+import styles from './styles'
+import classNames from 'classnames'
 
 interface WeekDaysSelectorProps {
   weekDaysRepetition: Array<number>
@@ -53,10 +56,11 @@ const DEFAULT_WEEK_DAYS: RecurrenceDay[] = [
   }
 ]
 
-export const WeekDaysSelector = ({
+const WeekDaysSelector = ({
+  classes,
   weekDaysRepetition,
   onDayClicked
-}: WeekDaysSelectorProps) => {
+}: WeekDaysSelectorProps & WithStyles<typeof styles>) => {
   const handleDayClicked = (day: RecurrenceDay) => {
     // TODO: fix set&unset
     let newDaysList: Array<number> = weekDaysRepetition
@@ -68,7 +72,7 @@ export const WeekDaysSelector = ({
     onDayClicked(newDaysList)
   }
   return (
-    <div>
+    <div className={classes.daysContainer}>
       {
         // TODO: Clickable buttons to select, multi-select
         DEFAULT_WEEK_DAYS.map((day) => (
@@ -78,12 +82,16 @@ export const WeekDaysSelector = ({
             arrow
           >
             <Button
+              className={classNames(classes.dayButton, {
+                [classes.selected]: weekDaysRepetition.includes(day.key)
+              })}
               key={`${day.key}-btn`}
-              variant={
-                weekDaysRepetition.includes(day.key) ? 'contained' : 'outlined'
-              }
-              color='primary'
+              // variant={
+              //   weekDaysRepetition.includes(day.key) ? 'contained' : 'outlined'
+              // }
+              // color='primary'
               onClick={() => handleDayClicked(day)}
+              classes={{ label: classes.dayButtonLabel }}
             >
               {day.symbol}
             </Button>
@@ -93,3 +101,5 @@ export const WeekDaysSelector = ({
     </div>
   )
 }
+
+export default withStyles(styles)(WeekDaysSelector)

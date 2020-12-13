@@ -5,10 +5,10 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
 
 import { RecurrenceType } from './types'
-import { TimeSelector } from './components/TimeSelector'
-import { EndingConditionSelector } from './components/EndingConditionSelector'
-import { FrequencySelector } from './components/FrequencySelector'
+import TimeSelector from './components/TimeSelector'
+import FrequencySelector from './components/FrequencySelector'
 import { DatePicker } from './components/general/DatePicker'
+import EndingConditionSelector from './components/EndingConditionSelector'
 
 interface RecurrenceProps {
   recurrence: RecurrenceType
@@ -52,10 +52,10 @@ export const Recurrence = ({ recurrence, onChange }: RecurrenceProps) => {
   const handleAllDayChange = (isAllDay: boolean) => {
     handleFieldChange('isAllDay', isAllDay)
   }
-  const handleStartTimeChange = (startTime: Date) => {
+  const handleStartTimeChange = (startTime?: Date) => {
     handleFieldChange('startTime', startTime)
   }
-  const handleEndTimeChange = (endTime: Date) => {
+  const handleEndTimeChange = (endTime?: Date) => {
     handleFieldChange('endTime', endTime)
   }
   return (
