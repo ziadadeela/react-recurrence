@@ -2,6 +2,8 @@ import * as React from 'react'
 import OutlinedInput from '@material-ui/core/OutlinedInput/OutlinedInput'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import FormControl from '@material-ui/core/FormControl'
+import { withStyles } from '@material-ui/core'
+import styles from './styles'
 
 // TODO: is this needed to assign default values?
 interface NumberInputProps {
@@ -15,7 +17,7 @@ interface NumberInputProps {
   max?: number
 }
 
-export const NumberInput = ({
+const NumberInput = ({
   name,
   label = '',
   value = 0,
@@ -55,3 +57,4 @@ export const NumberInput = ({
     </FormControl>
   )
 }
+export default withStyles(styles)(NumberInput)

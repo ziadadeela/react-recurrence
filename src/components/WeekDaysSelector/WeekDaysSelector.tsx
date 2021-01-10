@@ -13,25 +13,21 @@ interface WeekDaysSelectorProps {
 
 const DEFAULT_WEEK_DAYS: RecurrenceDay[] = [
   {
-    // key: 'sun',
     key: 0,
     title: 'Sunday',
     symbol: 'S'
   },
   {
-    // key: 'mon',
     key: 1,
     title: 'Monday',
     symbol: 'M'
   },
   {
-    // key: 'tue',
     key: 2,
     title: 'Tuesday',
     symbol: 'T'
   },
   {
-    // key: 'wed',
     key: 3,
     title: 'Wednesday',
     symbol: 'W'
@@ -43,13 +39,11 @@ const DEFAULT_WEEK_DAYS: RecurrenceDay[] = [
     symbol: 'T'
   },
   {
-    // key: 'fri',
     key: 5,
     title: 'Friday',
     symbol: 'F'
   },
   {
-    // key: 'sat',
     key: 6,
     title: 'Saturday',
     symbol: 'S'
@@ -62,7 +56,6 @@ const WeekDaysSelector = ({
   onDayClicked
 }: WeekDaysSelectorProps & WithStyles<typeof styles>) => {
   const handleDayClicked = (day: RecurrenceDay) => {
-    // TODO: fix set&unset
     let newDaysList: Array<number> = weekDaysRepetition
     if (newDaysList.includes(day.key)) {
       newDaysList = newDaysList.filter((d) => d !== day.key)
@@ -86,10 +79,6 @@ const WeekDaysSelector = ({
                 [classes.selected]: weekDaysRepetition.includes(day.key)
               })}
               key={`${day.key}-btn`}
-              // variant={
-              //   weekDaysRepetition.includes(day.key) ? 'contained' : 'outlined'
-              // }
-              // color='primary'
               onClick={() => handleDayClicked(day)}
               classes={{ label: classes.dayButtonLabel }}
             >

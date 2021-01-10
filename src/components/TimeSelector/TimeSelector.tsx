@@ -3,34 +3,23 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import { KeyboardTimePicker } from '@material-ui/pickers'
 import { Grid, withStyles } from '@material-ui/core'
-import styles from '../WeekDaysSelector/styles'
+import styles from './styles'
+import RecurrenceContext from '../RecurrenceContext'
+import { useContext } from 'react'
 
-interface TimeSelectorProps {
-  isAllDay: boolean
-  startTime?: Date
-  endTime?: Date
-  onAllDayChange: (isAllDay: boolean) => void
-  onStartTimeChange: (startTime?: Date) => void
-  onEndTimeChange: (endTime?: Date) => void
-}
+interface TimeSelectorProps {}
 
-const TimeSelector = ({
-  isAllDay,
-  startTime,
-  endTime,
-  onAllDayChange,
-  onStartTimeChange,
-  onEndTimeChange
-}: TimeSelectorProps) => {
-  // TODO: how to clear start&end time if allDay is selected
+const TimeSelector = ({}: TimeSelectorProps) => {
+  const { recurrence, onFieldChange } = useContext(RecurrenceContext)
+
   const handleAllDayChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onAllDayChange(event.target.checked)
+    onFieldChange('isAllDay', event.target.checked)
   }
-  const handleStartTimeChange = (date?: Date) => {
-    onStartTimeChange(date)
+  const handleStartTimeChange = (startTime?: Date) => {
+    onFieldChange('startTime', startTime)
   }
-  const handleEndTimeChange = (date?: Date) => {
-    onEndTimeChange(date)
+  const handleEndTimeChange = (endTime?: Date) => {
+    onFieldChange('endTime', endTime)
   }
 
   return (
@@ -42,7 +31,7 @@ const TimeSelector = ({
               <Checkbox
                 id='is-all-day'
                 name='is-all-day'
-                checked={isAllDay}
+                checked={recurrence.isAllDay}
                 onChange={handleAllDayChange}
                 color='primary'
               />
@@ -62,12 +51,12 @@ const TimeSelector = ({
             margin='normal'
             id='start-time'
             label='Start'
-            value={startTime}
+            value={recurrence.startTime}
             onChange={handleStartTimeChange}
             KeyboardButtonProps={{
               'aria-label': 'change time'
             }}
-            disabled={isAllDay}
+            disabled={recurrence.isAllDay}
           />
         </Grid>
         <Grid
@@ -81,12 +70,12 @@ const TimeSelector = ({
             margin='normal'
             id='end-time'
             label='End'
-            value={endTime}
+            value={recurrence.endTime}
             onChange={handleEndTimeChange}
             KeyboardButtonProps={{
               'aria-label': 'change time'
             }}
-            disabled={isAllDay}
+            disabled={recurrence.isAllDay}
           />
         </Grid>
       </Grid>

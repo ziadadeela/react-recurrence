@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { MenuItem } from '@material-ui/core'
+import { MenuItem, withStyles } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField/TextField'
-import { Option } from '../../types'
+import { Option } from '../../../types'
+import styles from './styles'
 
 // TODO: is this needed to assign default values?
 interface DropDownProps {
@@ -12,7 +13,7 @@ interface DropDownProps {
   options: Array<Option>
 }
 
-export const DropDown = ({
+const DropDown = ({
   name,
   label,
   value,
@@ -35,3 +36,4 @@ export const DropDown = ({
     </TextField>
   )
 }
+export default withStyles(styles)(DropDown)

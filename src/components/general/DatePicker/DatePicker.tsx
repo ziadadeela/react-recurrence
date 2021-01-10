@@ -3,6 +3,8 @@ import {
   KeyboardDatePickerProps
 } from '@material-ui/pickers'
 import * as React from 'react'
+import { withStyles } from '@material-ui/core'
+import styles from './styles'
 
 const DEFAULT_DATE_FORMAT = 'MM/dd/yyyy'
 
@@ -18,7 +20,7 @@ interface DatePickerProps extends KeyboardDatePickerProps {
   margin?: KeyboardDatePickerProps['margin']
 }
 
-export const DatePicker = ({
+const DatePicker = ({
   name,
   label,
   value,
@@ -45,3 +47,4 @@ export const DatePicker = ({
     />
   )
 }
+export default withStyles(styles)(DatePicker)

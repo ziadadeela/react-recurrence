@@ -5,43 +5,31 @@ import { Grid, withStyles } from '@material-ui/core'
 import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel'
 import Radio from '@material-ui/core/Radio/Radio'
 import FormControl from '@material-ui/core/FormControl'
-import { DatePicker } from '../general/DatePicker'
-import { NumberInput } from '../general/NumberInput'
+import DatePicker from '../general/DatePicker'
+import NumberInput from '../general/NumberInput'
 import { EndingCondition } from '../../types'
-import styles from '../WeekDaysSelector/styles'
+import styles from './styles'
+import { useContext } from 'react'
+import RecurrenceContext from '../RecurrenceContext'
 
-interface EndingConditionSelectorProps {
-  endDate?: Date
-  endingOccurrencesNumber?: number
-  endingCondition: string
-  onEndingConditionChange: (endingCondition: string) => void
-  onEndingOccurrencesNumberChange: (occurrencesNumber: number) => void
-  onEndDateChange: (endDate: Date) => void
-}
+interface EndingConditionSelectorProps {}
 
-const EndingConditionSelector = ({
-  endingCondition,
-  endDate,
-  endingOccurrencesNumber,
-  onEndingConditionChange,
-  onEndingOccurrencesNumberChange,
-  onEndDateChange
-}: EndingConditionSelectorProps) => {
+const EndingConditionSelector = ({}: EndingConditionSelectorProps) => {
+  const { recurrence, onFieldChange } = useContext(RecurrenceContext)
+
   const handleEndingConditionChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    onEndingConditionChange(event.target.value)
+    onFieldChange('endingCondition', event.target.value)
   }
-
-  // const handleEndingOccurrencesNumberChange = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   onEndingOccurrencesNumberChange(
-  //     // TODO: create custom number input and handle the parsing within
-  //     // parseNumberInput(event.target.value)
-  //     parseInt(event.target.value)
-  //   )
-  // }
+  const handleEndingOccurrencesNumberChange = (
+    endingOccurrencesNumber: number
+  ) => {
+    onFieldChange('endingOccurrencesNumber', endingOccurrencesNumber)
+  }
+  const handleEndDateChange = (date: Date) => {
+    onFieldChange('endDate', date)
+  }
 
   return (
     <div>
@@ -50,7 +38,7 @@ const EndingConditionSelector = ({
         <RadioGroup
           aria-label='ends'
           name='ends'
-          value={endingCondition}
+          value={recurrence.endingCondition}
           onChange={handleEndingConditionChange}
         >
           <Grid
@@ -86,9 +74,11 @@ const EndingConditionSelector = ({
               <DatePicker
                 name='end-date'
                 label='End'
-                value={endDate}
-                onChange={onEndDateChange}
-                disabled={endingCondition !== EndingCondition.END_DATE}
+                value={recurrence.endDate}
+                onChange={handleEndDateChange}
+                disabled={
+                  recurrence.endingCondition !== EndingCondition.END_DATE
+                }
               />
             </Grid>
           </Grid>
@@ -103,11 +93,12 @@ const EndingConditionSelector = ({
             <Grid item sm={6}>
               <NumberInput
                 name='ending-occurrences-number'
-                value={endingOccurrencesNumber}
-                onChange={onEndingOccurrencesNumberChange}
+                value={recurrence.endingOccurrencesNumber}
+                onChange={handleEndingOccurrencesNumberChange}
                 adornmentLabel='occurrences'
                 disabled={
-                  endingCondition !== EndingCondition.OCCURRENCES_NUMBER
+                  recurrence.endingCondition !==
+                  EndingCondition.OCCURRENCES_NUMBER
                 }
               />
             </Grid>

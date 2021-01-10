@@ -1,77 +1,74 @@
 import * as React from 'react'
-import { Option } from '../../types'
+import { FrequencyType, Option } from '../../types'
 import Grid from '@material-ui/core/Grid'
 import Fade from '@material-ui/core/Fade'
-import { DropDown } from '../general/DropDown'
-import { NumberInput } from '../general/NumberInput'
+import DropDown from '../general/DropDown'
+import NumberInput from '../general/NumberInput'
 import WeekDaysSelector from '../WeekDaysSelector'
 import { withStyles } from '@material-ui/core'
-import styles from '../WeekDaysSelector/styles'
+import styles from './styles'
+import { useContext } from 'react'
+import RecurrenceContext from '../RecurrenceContext'
 
-interface FrequencySelectorProps {
-  frequency: string
-  numberOfRepetitions?: number
-  weekDaysRepetition: Array<number>
-  onFrequencyChange: (frequency: string) => void
-  onNumberOfRepetitionsChange: (numberOfRepetitions: number) => void
-  onWeekDaysChange: (weekDays: Array<number>) => void
-}
+interface FrequencySelectorProps {}
 const FREQUENCY_OPTIONS: Option[] = [
   {
-    key: 'none',
+    key: FrequencyType.NONE,
     title: 'Does not repeat'
   },
   {
-    key: 'hourly',
+    key: FrequencyType.HOURLY,
     title: 'Hourly'
   },
   {
-    key: 'daily',
+    key: FrequencyType.DAILY,
     title: 'Daily'
   },
   {
-    key: 'weekly',
+    key: FrequencyType.WEEKLY,
     title: 'Weekly'
   },
   {
-    key: 'monthly',
+    key: FrequencyType.MONTHLY,
     title: 'Monthly'
   },
   {
-    key: 'annually',
+    key: FrequencyType.ANNUALLY,
     title: 'Annually'
   }
 ]
-const FrequencySelector = ({
-  frequency,
-  numberOfRepetitions,
-  weekDaysRepetition,
-  onFrequencyChange,
-  onNumberOfRepetitionsChange,
-  onWeekDaysChange
-}: FrequencySelectorProps) => {
+const FrequencySelector = ({}: FrequencySelectorProps) => {
+  const { recurrence, onFieldChange } = useContext(RecurrenceContext)
+
   const handleFrequencyChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    onFrequencyChange(event.target.value)
+    onFieldChange('frequency', event.target.value)
+  }
+  const handleNumberOfRepetitionChange = (numberOfRepetitions: number) => {
+    onFieldChange('numberOfRepetitions', numberOfRepetitions)
+  }
+  const handleWeekDaysChange = (days: Array<number>) => {
+    onFieldChange('weekDaysRepetition', days)
   }
 
   const getFrequencyLabel = () => {
-    switch (frequency) {
-      case 'hourly':
+    switch (recurrence.frequency) {
+      case FrequencyType.HOURLY:
         return 'hour'
-      case 'daily':
+      case FrequencyType.DAILY:
         return 'day'
-      case 'weekly':
+      case FrequencyType.WEEKLY:
         return 'week'
-      case 'monthly':
+      case FrequencyType.MONTHLY:
         return 'month'
-      case 'annually':
+      case FrequencyType.ANNUALLY:
         return 'year'
       default:
         return ''
     }
   }
+
   const getRepetitionsLabelByFrequency = () => {
     const frequencyLabel = getFrequencyLabel()
     if (frequencyLabel === '') {
@@ -79,34 +76,35 @@ const FrequencySelector = ({
     }
     return `${frequencyLabel}(s)`
   }
+
   return (
     <div>
       <Grid item xs={12}>
         <DropDown
           name='frequency'
-          value={frequency}
+          value={recurrence.frequency}
           onChange={handleFrequencyChange}
           label='Frequency'
           options={FREQUENCY_OPTIONS}
         />
       </Grid>
-      {frequency !== 'none' && (
+      {recurrence.frequency !== FrequencyType.NONE && (
         <Grid item xs={12}>
           <NumberInput
             name='number-of-repetition'
-            value={numberOfRepetitions}
-            onChange={onNumberOfRepetitionsChange}
+            value={recurrence.numberOfRepetitions}
+            onChange={handleNumberOfRepetitionChange}
             adornmentLabel={getRepetitionsLabelByFrequency()}
           />
         </Grid>
       )}
 
-      {frequency === 'weekly' && (
-        <Fade in={frequency === 'weekly'}>
+      {recurrence.frequency === FrequencyType.WEEKLY && (
+        <Fade in={recurrence.frequency === FrequencyType.WEEKLY}>
           <Grid item sm={12}>
             <WeekDaysSelector
-              weekDaysRepetition={weekDaysRepetition}
-              onDayClicked={onWeekDaysChange}
+              weekDaysRepetition={recurrence.weekDaysRepetition}
+              onDayClicked={handleWeekDaysChange}
             />
           </Grid>
         </Fade>
