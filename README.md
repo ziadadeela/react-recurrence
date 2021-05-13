@@ -1,4 +1,4 @@
-#![Alt logo](./src/assets/logo.png?raw=true ) React Recurrence
+# ![Alt logo](./src/assets/logo.png?raw=true ) React Recurrence
 
 [![NPM](https://img.shields.io/npm/v/react-recurrence.svg)](https://www.npmjs.com/package/react-recurrence) ![npm](https://img.shields.io/npm/dt/react-recurrence) ![NPM](https://img.shields.io/npm/l/react-recurrence) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -21,7 +21,12 @@ Below is a simple example on how to use the component. When any internal field i
 Please note that **MuiPickersUtilsProvider** must be added at the root of your application with the appropriate date util.
 
 ```tsx
-import Recurrence, { RecurrenceType, FrequencyType, EndingConditionType } from 'react-recurrence'
+import {
+  Recurrence,
+  RecurrenceType,
+  FrequencyType,
+  EndingConditionType
+} from 'react-recurrence'
 
 
 const App = () => {
