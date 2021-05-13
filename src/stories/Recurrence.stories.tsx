@@ -1,5 +1,5 @@
 import React from 'react'
-import Recurrence from '../index'
+import { Recurrence } from '../index'
 import { Meta, Story } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { EndingConditionType, FrequencyType } from '../types'
