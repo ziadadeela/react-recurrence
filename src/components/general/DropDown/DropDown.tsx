@@ -1,24 +1,18 @@
 import * as React from 'react'
-import { MenuItem, withStyles } from '@material-ui/core'
+import { MenuItem, TextFieldProps, withStyles } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField/TextField'
 import { Option } from '../../../types'
 import styles from './styles'
 
-// TODO: is this needed to assign default values?
-interface DropDownProps {
-  name: string
-  label: string
-  value: any // TODO: is it correct?
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  options: Array<Option>
-}
+type DropDownProps = TextFieldProps & { options: Array<Option> }
 
 const DropDown = ({
   name,
   label,
   value,
   onChange = () => {},
-  options = []
+  options = [],
+  ...others
 }: DropDownProps) => {
   return (
     <TextField
@@ -27,6 +21,7 @@ const DropDown = ({
       value={value}
       onChange={onChange}
       label={label}
+      {...others}
     >
       {options.map((option) => (
         <MenuItem key={option.key} value={option.key}>

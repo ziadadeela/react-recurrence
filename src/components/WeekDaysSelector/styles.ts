@@ -4,7 +4,7 @@ export default (theme: Theme) => {
   return createStyles({
     daysContainer: {
       display: 'inline-flex',
-      marginRight: theme.spacing(2)
+      margin: theme.spacing(2)
     },
     dayButton: {
       width: 24,

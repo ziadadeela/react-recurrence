@@ -1,23 +1,27 @@
 import React from 'react'
-import { EndingCondition, RecurrenceType } from '../types'
+import { EndingConditionType, FrequencyType, RecurrenceType } from '../types'
 
 interface RecurrenceContextType {
   recurrence: RecurrenceType
   onFieldChange: (key: string, value: any) => void
+  onFieldsChange: (object: any) => void
 }
-
+const today = new Date()
 const contextInitValue: RecurrenceContextType = {
   recurrence: {
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: today,
+    endDate: today,
     isAllDay: false,
-    frequency: 'weekly',
+    frequency: FrequencyType.Weekly,
     numberOfRepetitions: 1,
     weekDaysRepetition: [],
-    endingCondition: EndingCondition.NONE,
-    endingOccurrencesNumber: 1
+    endingCondition: EndingConditionType.None,
+    endingOccurrencesNumber: 1,
+    startTime: today,
+    endTime: today
   },
-  onFieldChange: () => {}
+  onFieldChange: () => {},
+  onFieldsChange: () => {}
 }
 
 const RecurrenceContext = React.createContext<RecurrenceContextType>(

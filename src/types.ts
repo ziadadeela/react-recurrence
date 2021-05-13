@@ -1,19 +1,24 @@
-export interface CustomRecurrenceType {
-  numberOfRepetitions: number
-  repeatOption: string
-  weekDaysRepetition: Array<RecurrenceDay>
-  monthlyRepetition: string
-  endingCondition: string
-  endingDate: Date
-  endingOccurrencesNumber: number
+export enum EndingConditionType {
+  None = 'none',
+  EndDate = 'end_date',
+  OccurrencesNumber = 'occurrences_number'
+}
+
+export enum FrequencyType {
+  None = 'none',
+  Hourly = 'hourly',
+  Daily = 'daily',
+  Weekly = 'weekly',
+  Monthly = 'monthly',
+  Annually = 'annually'
 }
 
 export interface RecurrenceType {
   startDate: Date
-  frequency: string
+  frequency: FrequencyType
   numberOfRepetitions?: number
   weekDaysRepetition: Array<number>
-  endingCondition: string
+  endingCondition: EndingConditionType
   endingOccurrencesNumber?: number
   endDate?: Date
   isAllDay: boolean
@@ -30,10 +35,4 @@ export interface RecurrenceDay {
 export interface Option {
   key: string
   title: string
-}
-
-export const EndingCondition = {
-  NONE: 'none',
-  END_DATE: 'end_date',
-  OCCURRENCES_NUMBER: 'occurrences_number'
 }

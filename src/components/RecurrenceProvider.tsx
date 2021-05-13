@@ -5,15 +5,19 @@ import RecurrenceContext from './RecurrenceContext'
 export interface RecurrenceProviderProps {
   recurrence: RecurrenceType
   onFieldChange: (key: string, value: any) => void
+  onFieldsChange: (object: any) => void
 }
 
 const RecurrenceProvider: FC<RecurrenceProviderProps> = ({
   recurrence,
-  onFieldChange,
+  onFieldChange = () => {},
+  onFieldsChange = () => {},
   children
 }) => {
   return (
-    <RecurrenceContext.Provider value={{ recurrence, onFieldChange }}>
+    <RecurrenceContext.Provider
+      value={{ recurrence, onFieldChange, onFieldsChange }}
+    >
       {children}
     </RecurrenceContext.Provider>
   )

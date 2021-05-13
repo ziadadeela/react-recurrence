@@ -2,16 +2,14 @@ import * as React from 'react'
 import OutlinedInput from '@material-ui/core/OutlinedInput/OutlinedInput'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import FormControl from '@material-ui/core/FormControl'
-import { withStyles } from '@material-ui/core'
+import { InputBaseProps, withStyles } from '@material-ui/core'
 import styles from './styles'
 
-// TODO: is this needed to assign default values?
-interface NumberInputProps {
+type NumberInputProps = Omit<InputBaseProps, 'onChange'> & {
   name: string
   label?: string
-  value?: number // TODO: is it correct?
+  value?: number
   onChange: (value: number) => void
-  disabled?: boolean
   adornmentLabel?: string
   min?: number
   max?: number
@@ -25,10 +23,10 @@ const NumberInput = ({
   disabled = false,
   adornmentLabel = '',
   min = 1,
-  max = 1000
+  max = 1000,
+  ...others
 }: NumberInputProps) => {
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // TODO: problem when emptying the number field: The specified value "NaN" cannot be parsed, or is out of range
     const value = parseInt(event.target.value)
     if (isNaN(value)) return
     onChange(value)
@@ -53,6 +51,7 @@ const NumberInput = ({
           'decimal-separator': 'false'
         }}
         labelWidth={0}
+        {...others}
       />
     </FormControl>
   )

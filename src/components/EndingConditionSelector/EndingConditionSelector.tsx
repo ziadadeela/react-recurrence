@@ -1,21 +1,23 @@
 import * as React from 'react'
 import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup/RadioGroup'
-import { Grid, withStyles } from '@material-ui/core'
+import { Grid, WithStyles, withStyles } from '@material-ui/core'
 import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel'
 import Radio from '@material-ui/core/Radio/Radio'
 import FormControl from '@material-ui/core/FormControl'
 import DatePicker from '../general/DatePicker'
 import NumberInput from '../general/NumberInput'
-import { EndingCondition } from '../../types'
+import { EndingConditionType } from '../../types'
 import styles from './styles'
-import { useContext } from 'react'
 import RecurrenceContext from '../RecurrenceContext'
+import { FunctionComponent, useContext, useEffect } from 'react'
 
-interface EndingConditionSelectorProps {}
-
-const EndingConditionSelector = ({}: EndingConditionSelectorProps) => {
-  const { recurrence, onFieldChange } = useContext(RecurrenceContext)
+const EndingConditionSelector: FunctionComponent<WithStyles<typeof styles>> = ({
+  classes
+}) => {
+  const { recurrence, onFieldChange, onFieldsChange } = useContext(
+    RecurrenceContext
+  )
 
   const handleEndingConditionChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -30,6 +32,22 @@ const EndingConditionSelector = ({}: EndingConditionSelectorProps) => {
   const handleEndDateChange = (date: Date) => {
     onFieldChange('endDate', date)
   }
+  useEffect(() => {
+    switch (recurrence.endingCondition) {
+      case EndingConditionType.None:
+        onFieldsChange({
+          endDate: null,
+          endingOccurrencesNumber: undefined
+        })
+        break
+      case EndingConditionType.EndDate:
+        onFieldChange('endingOccurrencesNumber', undefined)
+        break
+      case EndingConditionType.OccurrencesNumber:
+        onFieldChange('endDate', null)
+        break
+    }
+  }, [recurrence.endingCondition])
 
   return (
     <div>
@@ -40,6 +58,7 @@ const EndingConditionSelector = ({}: EndingConditionSelectorProps) => {
           name='ends'
           value={recurrence.endingCondition}
           onChange={handleEndingConditionChange}
+          className={classes.radioGroup}
         >
           <Grid
             container
@@ -50,8 +69,14 @@ const EndingConditionSelector = ({}: EndingConditionSelectorProps) => {
           >
             <Grid item sm={6}>
               <FormControlLabel
-                value={EndingCondition.NONE}
-                control={<Radio color='primary' />}
+                value={EndingConditionType.None}
+                control={
+                  <Radio
+                    color='primary'
+                    className={classes.radio}
+                    data-testid='recurrence-ending-condition-none-choice'
+                  />
+                }
                 label='Never'
               />
             </Grid>
@@ -65,8 +90,14 @@ const EndingConditionSelector = ({}: EndingConditionSelectorProps) => {
               alignItems='flex-start'
             >
               <FormControlLabel
-                value={EndingCondition.END_DATE}
-                control={<Radio color='primary' />}
+                value={EndingConditionType.EndDate}
+                control={
+                  <Radio
+                    color='primary'
+                    className={classes.radio}
+                    data-testid='recurrence-ending-condition-end-date-choice'
+                  />
+                }
                 label='On'
               />
             </Grid>
@@ -77,16 +108,28 @@ const EndingConditionSelector = ({}: EndingConditionSelectorProps) => {
                 value={recurrence.endDate}
                 onChange={handleEndDateChange}
                 disabled={
-                  recurrence.endingCondition !== EndingCondition.END_DATE
+                  recurrence.endingCondition !== EndingConditionType.EndDate
                 }
+                minDate={recurrence.startDate}
+                minDateMessage='End Date must be equal or after Start Date'
+                className={classes.endDate}
+                inputProps={{
+                  'data-testid': 'recurrence-ending-condition-end-date'
+                }}
               />
             </Grid>
           </Grid>
           <Grid container spacing={1}>
             <Grid item sm={6} container alignItems='flex-start'>
               <FormControlLabel
-                value={EndingCondition.OCCURRENCES_NUMBER}
-                control={<Radio color='primary' />}
+                value={EndingConditionType.OccurrencesNumber}
+                control={
+                  <Radio
+                    color='primary'
+                    className={classes.radio}
+                    data-testid='recurrence-ending-condition-occurrences-number-choice'
+                  />
+                }
                 label='After'
               />
             </Grid>
@@ -98,8 +141,13 @@ const EndingConditionSelector = ({}: EndingConditionSelectorProps) => {
                 adornmentLabel='occurrences'
                 disabled={
                   recurrence.endingCondition !==
-                  EndingCondition.OCCURRENCES_NUMBER
+                  EndingConditionType.OccurrencesNumber
                 }
+                inputProps={{
+                  'data-testid':
+                    'recurrence-ending-condition-occurrences-number'
+                }}
+                className={classes.occurrencesNumber}
               />
             </Grid>
           </Grid>

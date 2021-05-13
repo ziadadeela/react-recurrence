@@ -5,12 +5,12 @@ import { KeyboardTimePicker } from '@material-ui/pickers'
 import { Grid, withStyles } from '@material-ui/core'
 import styles from './styles'
 import RecurrenceContext from '../RecurrenceContext'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
-interface TimeSelectorProps {}
-
-const TimeSelector = ({}: TimeSelectorProps) => {
-  const { recurrence, onFieldChange } = useContext(RecurrenceContext)
+const TimeSelector = () => {
+  const { recurrence, onFieldChange, onFieldsChange } = useContext(
+    RecurrenceContext
+  )
 
   const handleAllDayChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onFieldChange('isAllDay', event.target.checked)
@@ -21,11 +21,19 @@ const TimeSelector = ({}: TimeSelectorProps) => {
   const handleEndTimeChange = (endTime?: Date) => {
     onFieldChange('endTime', endTime)
   }
+  useEffect(() => {
+    if (recurrence.isAllDay) {
+      onFieldsChange({
+        startTime: null,
+        endTime: null
+      })
+    }
+  }, [recurrence.isAllDay])
 
   return (
     <div>
       <Grid container spacing={1}>
-        <Grid item sm={4} justify='flex-end' container alignItems='flex-end'>
+        <Grid item sm={2} justify='flex-end' container alignItems='flex-end'>
           <FormControlLabel
             control={
               <Checkbox
@@ -34,6 +42,7 @@ const TimeSelector = ({}: TimeSelectorProps) => {
                 checked={recurrence.isAllDay}
                 onChange={handleAllDayChange}
                 color='primary'
+                data-testid='recurrence-all-day'
               />
             }
             label='All day'
@@ -42,7 +51,7 @@ const TimeSelector = ({}: TimeSelectorProps) => {
         </Grid>
         <Grid
           item
-          sm={4}
+          sm={5}
           justify='flex-start'
           container
           alignItems='flex-start'
@@ -57,11 +66,14 @@ const TimeSelector = ({}: TimeSelectorProps) => {
               'aria-label': 'change time'
             }}
             disabled={recurrence.isAllDay}
+            inputProps={{
+              'data-testid': 'recurrence-start-time'
+            }}
           />
         </Grid>
         <Grid
           item
-          sm={4}
+          sm={5}
           justify='flex-start'
           container
           alignItems='flex-start'
@@ -76,6 +88,9 @@ const TimeSelector = ({}: TimeSelectorProps) => {
               'aria-label': 'change time'
             }}
             disabled={recurrence.isAllDay}
+            inputProps={{
+              'data-testid': 'recurrence-end-time'
+            }}
           />
         </Grid>
       </Grid>

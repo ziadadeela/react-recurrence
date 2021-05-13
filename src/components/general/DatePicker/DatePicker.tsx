@@ -8,18 +8,6 @@ import styles from './styles'
 
 const DEFAULT_DATE_FORMAT = 'MM/dd/yyyy'
 
-// TODO: is this needed to assign default values?
-interface DatePickerProps extends KeyboardDatePickerProps {
-  name: string
-  label: string
-  value: KeyboardDatePickerProps['value']
-  onChange: (date: Date) => void
-  disabled?: boolean
-  disablePast?: boolean
-  variant?: KeyboardDatePickerProps['variant']
-  margin?: KeyboardDatePickerProps['margin']
-}
-
 const DatePicker = ({
   name,
   label,
@@ -30,7 +18,7 @@ const DatePicker = ({
   variant = 'inline',
   margin = 'normal',
   ...props
-}: DatePickerProps) => {
+}: KeyboardDatePickerProps) => {
   return (
     <KeyboardDatePicker
       name={name}
