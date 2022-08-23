@@ -7,7 +7,7 @@ import NumberInput from '../general/NumberInput'
 import WeekDaysSelector from '../WeekDaysSelector'
 import { WithStyles, withStyles } from '@material-ui/core'
 import styles from './styles'
-import { FunctionComponent, useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import RecurrenceContext from '../RecurrenceContext'
 
 const FREQUENCY_OPTIONS: Option[] = [
@@ -36,9 +36,15 @@ const FREQUENCY_OPTIONS: Option[] = [
     title: 'Annually'
   }
 ]
-const FrequencySelector: FunctionComponent<WithStyles<typeof styles>> = ({
-  classes
-}) => {
+
+export interface FrequencySelectorProps {
+  frequencies?: Option[]
+}
+
+const FrequencySelector = ({
+  classes,
+  frequencies = FREQUENCY_OPTIONS
+}: FrequencySelectorProps & WithStyles<typeof styles>) => {
   const { recurrence, onFieldChange, onFieldsChange } = useContext(
     RecurrenceContext
   )
@@ -104,7 +110,7 @@ const FrequencySelector: FunctionComponent<WithStyles<typeof styles>> = ({
           value={recurrence.frequency}
           onChange={handleFrequencyChange}
           label='Frequency'
-          options={FREQUENCY_OPTIONS}
+          options={frequencies}
           className={classes.dropdown}
           data-testid='recurrence-frequency'
         />

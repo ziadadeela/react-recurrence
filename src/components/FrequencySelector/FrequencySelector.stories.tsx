@@ -109,3 +109,40 @@ Annually.decorators = [
     </RecurrenceProvider>
   )
 ]
+
+export const Subset = Template.bind({})
+Subset.args = {
+  frequencies: [
+    {
+      key: FrequencyType.Daily,
+      title: 'Every Day'
+    },
+    {
+      key: FrequencyType.Weekly,
+      title: 'Every Week'
+    },
+    {
+      key: FrequencyType.Monthly,
+      title: 'Every Month'
+    },
+    {
+      key: FrequencyType.Annually,
+      title: 'Every Year'
+    }
+  ]
+}
+
+Subset.decorators = [
+  (Story) => (
+    <RecurrenceProvider
+      recurrence={{
+        ...defaultStoryRecurrence,
+        frequency: FrequencyType.Annually
+      }}
+      onFieldChange={action('field changed')}
+      onFieldsChange={action('fields changed')}
+    >
+      <Story />
+    </RecurrenceProvider>
+  )
+]
