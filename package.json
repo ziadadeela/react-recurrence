@@ -1,6 +1,6 @@
 {
   "name": "@brank1994/react-recurrence-selector",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple, customizable, and reusable component for providing the recurrence functionality.",
   "author": "ziadadeela",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^17.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
