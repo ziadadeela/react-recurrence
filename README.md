@@ -138,7 +138,7 @@ Represents the start date of the recurrence.
 
 Represents how frequent the recurrence will be.
 
-Enum values: `None`, `Hourly`, `Daily`, `Weekly`, `Monthly`, `Annually`
+Enum values: `None`, `Hourly`, `Daily`, `Weekly`, `Monthly`, `Yearly`
 
 ### `numberOfRepetitions`
 

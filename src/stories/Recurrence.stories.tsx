@@ -69,11 +69,11 @@ MonthlyFrequency.args = {
   }
 }
 
-export const AnnuallyFrequency = Template.bind({})
-AnnuallyFrequency.args = {
+export const YearlyFrequency = Template.bind({})
+YearlyFrequency.args = {
   recurrence: {
     ...defaultStoryRecurrence,
-    frequency: FrequencyType.Annually
+    frequency: FrequencyType.Yearly
   }
 }
 

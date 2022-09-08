@@ -94,13 +94,13 @@ Monthly.decorators = [
   )
 ]
 
-export const Annually = Template.bind({})
-Annually.decorators = [
+export const Yearly = Template.bind({})
+Yearly.decorators = [
   (Story) => (
     <RecurrenceProvider
       recurrence={{
         ...defaultStoryRecurrence,
-        frequency: FrequencyType.Annually
+        frequency: FrequencyType.Yearly
       }}
       onFieldChange={action('field changed')}
       onFieldsChange={action('fields changed')}
@@ -126,7 +126,7 @@ Subset.args = {
       title: 'Every Month'
     },
     {
-      key: FrequencyType.Annually,
+      key: FrequencyType.Yearly,
       title: 'Every Year'
     }
   ]
@@ -137,7 +137,7 @@ Subset.decorators = [
     <RecurrenceProvider
       recurrence={{
         ...defaultStoryRecurrence,
-        frequency: FrequencyType.Annually
+        frequency: FrequencyType.Yearly
       }}
       onFieldChange={action('field changed')}
       onFieldsChange={action('fields changed')}

@@ -10,7 +10,7 @@ export enum FrequencyType {
   Daily = 'daily',
   Weekly = 'weekly',
   Monthly = 'monthly',
-  Annually = 'annually'
+  Yearly = 'yearly'
 }
 
 export interface RecurrenceType {

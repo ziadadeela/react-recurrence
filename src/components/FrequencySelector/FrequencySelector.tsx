@@ -32,8 +32,8 @@ const FREQUENCY_OPTIONS: Option[] = [
     title: 'Monthly'
   },
   {
-    key: FrequencyType.Annually,
-    title: 'Annually'
+    key: FrequencyType.Yearly,
+    title: 'Yearly'
   }
 ]
 
@@ -71,7 +71,7 @@ const FrequencySelector = ({
         return 'week'
       case FrequencyType.Monthly:
         return 'month'
-      case FrequencyType.Annually:
+      case FrequencyType.Yearly:
         return 'year'
       default:
         return ''
